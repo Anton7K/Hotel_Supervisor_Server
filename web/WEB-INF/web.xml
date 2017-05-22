@@ -58,4 +58,22 @@
         <servlet-name>getHotelRooms</servlet-name>
         <url-pattern>/getHotelRooms</url-pattern>
     </servlet-mapping>
+    <!--====================getRoomEquipment=========================-->
+    <servlet>
+        <servlet-name>getRoomEquipment</servlet-name>
+        <servlet-class>nure.kaplun.HotelSupervisor.controller.RoomEquipmentGetterServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>getRoomEquipment</servlet-name>
+        <url-pattern>/getRoomEquipment</url-pattern>
+    </servlet-mapping>
+    <!--====================addHotel=========================-->
+    <servlet>
+        <servlet-name>addHotel</servlet-name>
+        <servlet-class>nure.kaplun.HotelSupervisor.controller.AddHotelServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>addHotel</servlet-name>
+        <url-pattern>/addHotel</url-pattern>
+    </servlet-mapping>
 </web-app>

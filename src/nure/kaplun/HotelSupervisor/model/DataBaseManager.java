@@ -26,6 +26,11 @@ public class DataBaseManager {
     private static final String SELECT_EMPLOYEE_BY_LOGIN = "SELECT * FROM "+EMPLOYEES_TABLE+" WHERE login=?";
     private static final String SELECT_HOTELS_BY_ADMIN = "SELECT * FROM "+ HOTELS_TABLE +" WHERE adminId=?";
     private static final String SELECT_ROOMS_BY_HOTEL = "SELECT * FROM "+ ROOMS_TABLE +" WHERE hotelId=?";
+    private static final String SELECT_EQUIPMENT_BY_ROOM = "SELECT * FROM "+ EQUIPMENT_TABLE +" WHERE roomId=?";
+
+    private static final String DELETE_HOTEL_BY_ID = "DELETE FROM "+HOTELS_TABLE+" WHERE id=?";
+    private static final String DELETE_ROOM_BY_ID = "DELETE FROM "+ROOMS_TABLE+" WHERE id=?";
+    private static final String DELETE_EQUIPMENT_BY_ID = "DELETE FROM "+EQUIPMENT_TABLE+" WHERE id=?";
 
     public static void addAdmin(Connection connection, Admin admin){
         try (PreparedStatement stmt = connection.prepareStatement(INSERT_ADMINISTRATOR_QUERY)) {
@@ -96,6 +101,26 @@ public class DataBaseManager {
         return rooms;
     }
 
+    public static List<Equipment> getEquipmentByRoom(Connection connection, int roomId){
+        List<Equipment> equipment = new ArrayList<>();
+        try (PreparedStatement stmt = connection.prepareStatement(SELECT_EQUIPMENT_BY_ROOM)) {
+            stmt.setInt(1, roomId);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()){
+                Equipment appliance = new Equipment(rs.getInt("id"),
+                        rs.getString("type"),
+                        rs.getInt("roomId"),
+                        rs.getInt("maxValue"),
+                        rs.getInt("currentValue"));
+                equipment.add(appliance);
+            }
+            connection.close();
+        }
+        catch (SQLException ex){
+            ex.printStackTrace();
+        }
+        return equipment;
+    }
 
     public static Employee getEmployeeByLogin(Connection connection, String login){
         Employee employee = null;
@@ -117,8 +142,50 @@ public class DataBaseManager {
         }
         return employee;
     }
+//==================Delete===================
 
+    private static void deleteEntity(Connection connection, int hotelId, String deleteHotelById) {
+        try (PreparedStatement stmt = connection.prepareStatement(deleteHotelById)) {
+            stmt.setInt(1, hotelId);
+            stmt.executeQuery();
+            stmt.close();
+            connection.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
 
+    public static void deleteHotelById(Connection connection, int hotelId){
+        deleteEntity(connection, hotelId, DELETE_HOTEL_BY_ID);
+    }
+
+    public static void deleteRoomById(Connection connection, int roomId){
+        deleteEntity(connection, roomId, DELETE_ROOM_BY_ID);
+    }
+
+    public static void deleteEquipmentById(Connection connection, int equipmentId){
+        deleteEntity(connection, equipmentId, DELETE_EQUIPMENT_BY_ID);
+    }
+//    public static void deleteRoomWithReferences(int roomId){
+//        List<Equipment> roomEquipment = getEquipmentByRoom()
+//    }
+
+//    public static void deleteHotelWithReferences(int hotelId){
+//        List<Room> ho
+//    }
+
+//==================INSERT===================
+
+    public static void addHotel(Connection connection, String name, int adminId){
+        try (PreparedStatement stmt = connection.prepareStatement(INSERT_HOTEL_QUERY)) {
+            stmt.setString(1, name);
+            stmt.setInt(2, adminId);
+            stmt.execute();
+            connection.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
     public static void main(String[] args) {
         try {
             Connection connection = DataBaseConnector.openConnection();
