@@ -1,10 +1,9 @@
 package nure.kaplun.HotelSupervisor.controller;
 
-import com.google.gson.Gson;
 import nure.kaplun.HotelSupervisor.exceptions.IncorrectUserRoleException;
 import nure.kaplun.HotelSupervisor.model.Admin;
 import nure.kaplun.HotelSupervisor.model.DataBaseConnector;
-import nure.kaplun.HotelSupervisor.model.DataBaseManager;
+import nure.kaplun.HotelSupervisor.model.Repositories.AdminsRepository;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,7 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.sql.Connection;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -30,7 +29,10 @@ public class AdminRegistrationServlet extends HttpServlet {
         try {
             if(!checker.isUserWithLoginExist(login, "admin")){
                 Admin admin = new Admin(name,login,password);
-                DataBaseManager.addAdmin(DataBaseConnector.getInstance().getConnection(),admin);
+                Connection connection = DataBaseConnector.openConnection();
+                AdminsRepository adminsRepository = new AdminsRepository(connection);
+                adminsRepository.addAdmin(admin);
+                DataBaseConnector.closeConnection(connection);
                 jsonMap.put("isRegistered", "true");
             }
             else {
