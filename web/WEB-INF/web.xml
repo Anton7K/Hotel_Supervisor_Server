@@ -85,4 +85,31 @@
         <servlet-name>addEquipment</servlet-name>
         <url-pattern>/addEquipment</url-pattern>
     </servlet-mapping>
+    <!--====================deleteEquipment=========================-->
+    <servlet>
+        <servlet-name>deleteEquipment</servlet-name>
+        <servlet-class>nure.kaplun.HotelSupervisor.controller.EquipmentServlets.DeleteEquipmentServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>deleteEquipment</servlet-name>
+        <url-pattern>/deleteEquipment</url-pattern>
+    </servlet-mapping>
+    <!--====================editEquipment=========================-->
+    <servlet>
+        <servlet-name>editEquipment</servlet-name>
+        <servlet-class>nure.kaplun.HotelSupervisor.controller.EquipmentServlets.EditEquipmentServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>editEquipment</servlet-name>
+        <url-pattern>/editEquipment</url-pattern>
+    </servlet-mapping>
+    <!--====================getEquipmentById=========================-->
+    <servlet>
+        <servlet-name>getEquipmentById</servlet-name>
+        <servlet-class>nure.kaplun.HotelSupervisor.controller.EquipmentServlets.GetEquipmentByIdServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>getEquipmentById</servlet-name>
+        <url-pattern>/getEquipmentById</url-pattern>
+    </servlet-mapping>
 </web-app>

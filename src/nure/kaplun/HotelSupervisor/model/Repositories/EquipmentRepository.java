@@ -16,8 +16,10 @@ import java.util.List;
  */
 public class EquipmentRepository {
     public static final String SELECT_EQUIPMENT_BY_ROOM = "SELECT * FROM "+ DbTables.EQUIPMENT_TABLE +" WHERE roomId=?";
+    public static final String SELECT_EQUIPMENT_BY_ID = "SELECT * FROM "+ DbTables.EQUIPMENT_TABLE +" WHERE id=?";
     public static final String DELETE_EQUIPMENT_BY_ID = "DELETE FROM "+ DbTables.EQUIPMENT_TABLE+" WHERE id=?";
     private static final String INSERT_EQUIPMENT_QUERY = "INSERT INTO " + DbTables.EQUIPMENT_TABLE + " (type,roomId,`maxValue`,currentValue) VALUES (?,?,?,?)";
+    private static final String UPDATE_EQUIPMENT_QUERY = "UPDATE " +DbTables.EQUIPMENT_TABLE+ " SET type = ?,`maxValue` = ? WHERE `id` = ?";
 
     private Connection connection;
 
@@ -45,8 +47,40 @@ public class EquipmentRepository {
         return equipment;
     }
 
-    public  void deleteEquipmentById(int roomId){
-        DataBaseManager.deleteEntity(connection, roomId, DELETE_EQUIPMENT_BY_ID);
+    public Equipment getEquipmentById(int equipmentId){
+        Equipment equipment = null;
+        try (PreparedStatement stmt = connection.prepareStatement(SELECT_EQUIPMENT_BY_ID)) {
+            stmt.setInt(1, equipmentId);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()){
+                Equipment appliance = new Equipment(rs.getInt("id"),
+                        rs.getString("type"),
+                        rs.getInt("roomId"),
+                        rs.getInt("maxValue"),
+                        rs.getInt("currentValue"));
+                equipment = appliance;
+            }
+        }
+        catch (SQLException ex){
+            ex.printStackTrace();
+        }
+        return equipment;
+    }
+
+    public  void deleteEquipmentById(int equipmentId){
+        DataBaseManager.deleteEntity(connection, equipmentId, DELETE_EQUIPMENT_BY_ID);
+    }
+
+    public void updateEquipment(int equipmentId, String type, int maxValue){
+        try (PreparedStatement stmt = connection.prepareStatement(UPDATE_EQUIPMENT_QUERY)) {
+            stmt.setString(1, type);
+            stmt.setInt(2, maxValue);
+            stmt.setInt(3, equipmentId);
+            stmt.executeUpdate();
+        }
+        catch (SQLException ex){
+            ex.printStackTrace();
+        }
     }
 
     public void addEquipment(String type, int roomId, int maxValue){
