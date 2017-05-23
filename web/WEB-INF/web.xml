@@ -43,7 +43,7 @@
 <!--====================getHotels=========================-->
     <servlet>
         <servlet-name>getHotels</servlet-name>
-        <servlet-class>nure.kaplun.HotelSupervisor.controller.HotelsGetterServlet</servlet-class>
+        <servlet-class>nure.kaplun.HotelSupervisor.controller.HotelServlets.HotelsGetterServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>getHotels</servlet-name>
@@ -52,7 +52,7 @@
     <!--====================getHotelRooms=========================-->
     <servlet>
         <servlet-name>getHotelRooms</servlet-name>
-        <servlet-class>nure.kaplun.HotelSupervisor.controller.HotelRoomsGetterServlet</servlet-class>
+        <servlet-class>nure.kaplun.HotelSupervisor.controller.RoomServlets.HotelRoomsGetterServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>getHotelRooms</servlet-name>
@@ -61,7 +61,7 @@
     <!--====================getRoomEquipment=========================-->
     <servlet>
         <servlet-name>getRoomEquipment</servlet-name>
-        <servlet-class>nure.kaplun.HotelSupervisor.controller.RoomEquipmentGetterServlet</servlet-class>
+        <servlet-class>nure.kaplun.HotelSupervisor.controller.EquipmentServlets.RoomEquipmentGetterServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>getRoomEquipment</servlet-name>
@@ -70,10 +70,19 @@
     <!--====================addHotel=========================-->
     <servlet>
         <servlet-name>addHotel</servlet-name>
-        <servlet-class>nure.kaplun.HotelSupervisor.controller.AddHotelServlet</servlet-class>
+        <servlet-class>nure.kaplun.HotelSupervisor.controller.HotelServlets.AddHotelServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>addHotel</servlet-name>
         <url-pattern>/addHotel</url-pattern>
+    </servlet-mapping>
+    <!--====================addEquipment=========================-->
+    <servlet>
+        <servlet-name>addEquipment</servlet-name>
+        <servlet-class>nure.kaplun.HotelSupervisor.controller.EquipmentServlets.AddEquipmentServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>addEquipment</servlet-name>
+        <url-pattern>/addEquipment</url-pattern>
     </servlet-mapping>
 </web-app>

@@ -1,4 +1,4 @@
-package nure.kaplun.HotelSupervisor.controller;
+package nure.kaplun.HotelSupervisor.controller.HotelServlets;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

@@ -1,5 +1,6 @@
-package nure.kaplun.HotelSupervisor.controller;
+package nure.kaplun.HotelSupervisor.controller.HotelServlets;
 
+import nure.kaplun.HotelSupervisor.controller.JsonSender;
 import nure.kaplun.HotelSupervisor.model.DataBaseConnector;
 import nure.kaplun.HotelSupervisor.model.DataBaseManager;
 import nure.kaplun.HotelSupervisor.model.Hotel;

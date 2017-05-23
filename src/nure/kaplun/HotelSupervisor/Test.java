@@ -5,32 +5,18 @@ import nure.kaplun.HotelSupervisor.exceptions.IncorrectUserRoleException;
 import nure.kaplun.HotelSupervisor.model.Admin;
 import nure.kaplun.HotelSupervisor.model.DataBaseConnector;
 import nure.kaplun.HotelSupervisor.model.DataBaseManager;
+import nure.kaplun.HotelSupervisor.model.Repositories.EquipmentRepository;
+
+import java.sql.Connection;
 
 /**
  * Created by Anton on 15.05.2017.
  */
 public class Test {
     public static void main(String[] args){
-        UserDataChecker checker=new UserDataChecker();
-        try {
-            boolean isValid = checker.checkUserData("dd","12345", "admin");
-            System.out.println(isValid);
-            System.out.println(checker.getError());
-        } catch (IncorrectUserRoleException e) {
-            e.printStackTrace();
-        }
-
-//        String name = "Petya";
-//        String login = "dd";
-//        String password = "12345";
-//        UserDataChecker checker = new UserDataChecker();
-//        try {
-//            if(!checker.isUserWithLoginExist(login, "admin")){
-//                Admin admin = new Admin(name,login,password);
-//                DataBaseManager.addAdmin(DataBaseConnector.openConnection(),admin);
-//            }
-//        } catch (IncorrectUserRoleException e) {
-//            e.printStackTrace();
-//        }
+        Connection connection = DataBaseConnector.openConnection();
+        EquipmentRepository equipmentRepository = new EquipmentRepository(connection);
+        equipmentRepository.addEquipment("Мыло", 1, 500);
+        DataBaseConnector.closeConnection(connection);
     }
 }

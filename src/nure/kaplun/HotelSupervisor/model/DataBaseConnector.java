@@ -25,6 +25,14 @@ public class DataBaseConnector {
 
     }
 
+    public static void closeConnection(Connection connection) {
+        try {
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public Connection getConnection() {
 
         if (connection == null) {
