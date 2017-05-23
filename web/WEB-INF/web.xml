@@ -112,4 +112,22 @@
         <servlet-name>getEquipmentById</servlet-name>
         <url-pattern>/getEquipmentById</url-pattern>
     </servlet-mapping>
+    <!--====================getHotelEmployees=========================-->
+    <servlet>
+        <servlet-name>getHotelEmployees</servlet-name>
+        <servlet-class>nure.kaplun.HotelSupervisor.controller.EmployeeServlets.HotelEmployeesGetterServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>getHotelEmployees</servlet-name>
+        <url-pattern>/getHotelEmployees</url-pattern>
+    </servlet-mapping>
+    <!--====================addEmployee=========================-->
+    <servlet>
+        <servlet-name>addEmployee</servlet-name>
+        <servlet-class>nure.kaplun.HotelSupervisor.controller.EmployeeServlets.AddEmployeeServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>addEmployee</servlet-name>
+        <url-pattern>/addEmployee</url-pattern>
+    </servlet-mapping>
 </web-app>

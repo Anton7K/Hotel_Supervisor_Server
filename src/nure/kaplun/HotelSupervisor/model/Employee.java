@@ -12,4 +12,26 @@ public class Employee extends User {
         this.age = age;
         this.hotelId = hotelId;
     }
+
+    public Employee(String name, String login, String password, int age, int hotelId) {
+        super(name, login, password);
+        this.age = age;
+        this.hotelId = hotelId;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public int getHotelId() {
+        return hotelId;
+    }
+
+    public void setHotelId(int hotelId) {
+        this.hotelId = hotelId;
+    }
 }
