@@ -14,6 +14,22 @@ import java.sql.SQLException;
  */
 public class DataBaseManager {
 
+    private static final String SELECT_EMPLOYEE_HOTEL_Id = "SELECT hotelId FROM "+ DbTables.EMPLOYEES_TABLE +" WHERE id=?";
+
+    public static int getEmployeeHotelId(Connection connection, int employeeId){
+        int hotelId=-1;
+        try (PreparedStatement stmt = connection.prepareStatement(SELECT_EMPLOYEE_HOTEL_Id)) {
+            stmt.setInt(1, employeeId);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()){
+                hotelId=rs.getInt("hotelId");
+            }
+        }
+        catch (SQLException ex){
+            ex.printStackTrace();
+        }
+        return hotelId;
+    }
     //==================Delete===================
 
     public static void deleteEntity(Connection connection, int entityId, String deleteEntityByIdQuery) {
@@ -27,34 +43,5 @@ public class DataBaseManager {
         }
     }
 
-    public static void deleteHotelById(Connection connection, int hotelId){
-        deleteEntity(connection, hotelId, HotelsRepository.DELETE_HOTEL_BY_ID);
-    }
 
-    public static void deleteEquipmentById(Connection connection, int equipmentId){
-        deleteEntity(connection, equipmentId, EquipmentRepository.DELETE_EQUIPMENT_BY_ID);
-    }
-//    public static void deleteRoomWithReferences(int roomId){
-//        List<Equipment> roomEquipment = getEquipmentByRoom()
-//    }
-
-//    public static void deleteHotelWithReferences(int hotelId){
-//        List<Room> ho
-//    }
-
-//==================INSERT===================
-
-    public static void main(String[] args) {
-        try {
-            Connection connection = DataBaseConnector.openConnection();
-            PreparedStatement stmt = connection.prepareStatement("SELECT * FROM hotel_administrators WHERE login=?");
-            stmt.setString(1, "lll");
-            ResultSet rs = stmt.executeQuery();
-            while (rs.next()) {
-                System.out.println(rs.getString("name"));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
 }

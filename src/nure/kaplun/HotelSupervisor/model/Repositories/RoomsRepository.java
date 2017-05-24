@@ -15,8 +15,9 @@ import java.util.List;
  * Created by Anton on 22.05.2017.
  */
 public class RoomsRepository {
-    private static final String INSERT_ROOM_QUERY = "INSERT INTO" + DbTables.ROOMS_TABLE + "(name, hotelId)VALUES(?,?)";
+    private static final String INSERT_ROOM_QUERY = "INSERT INTO " + DbTables.ROOMS_TABLE + "(name, hotelId)VALUES(?,?)";
     private static final String SELECT_ROOMS_BY_HOTEL = "SELECT * FROM "+ DbTables.ROOMS_TABLE +" WHERE hotelId=?";
+    private static final String SELECT_ROOM_BY_ID = "SELECT * FROM "+ DbTables.ROOMS_TABLE +" WHERE id=?";
     private static final String DELETE_ROOM_BY_ID = "DELETE FROM "+ DbTables.ROOMS_TABLE+" WHERE id=?";
 
     private Connection connection;
@@ -42,10 +43,27 @@ public class RoomsRepository {
         }
         return rooms;
     }
+
+    public Room getRoomById(int id){
+        Room room=null;
+        try (PreparedStatement stmt = connection.prepareStatement(SELECT_ROOM_BY_ID)) {
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()){
+                room = new Room(rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getInt("hotelId"));
+            }
+        }
+        catch (SQLException ex){
+            ex.printStackTrace();
+        }
+        return room;
+    }
     public void addRoom(String name, int hotelId){
         try (PreparedStatement stmt = connection.prepareStatement(INSERT_ROOM_QUERY)) {
             stmt.setString(1, name);
-            stmt.setInt(1, hotelId);
+            stmt.setInt(2, hotelId);
             stmt.execute();
             stmt.close();
         } catch (SQLException ex) {

@@ -130,4 +130,22 @@
         <servlet-name>addEmployee</servlet-name>
         <url-pattern>/addEmployee</url-pattern>
     </servlet-mapping>
+    <!--====================addEmployee=========================-->
+    <servlet>
+        <servlet-name>getHotelEquipment</servlet-name>
+        <servlet-class>nure.kaplun.HotelSupervisor.controller.EquipmentServlets.HotelEquipmentGetterServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>getHotelEquipment</servlet-name>
+        <url-pattern>/getHotelEquipment</url-pattern>
+    </servlet-mapping>
+    <!--====================addEmployee=========================-->
+    <servlet>
+        <servlet-name>addRoom</servlet-name>
+        <servlet-class>nure.kaplun.HotelSupervisor.controller.RoomServlets.AddRoomServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>addRoom</servlet-name>
+        <url-pattern>/addRoom</url-pattern>
+    </servlet-mapping>
 </web-app>
