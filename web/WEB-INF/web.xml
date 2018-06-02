@@ -40,7 +40,7 @@
         <servlet-name>logout</servlet-name>
         <url-pattern>/logout</url-pattern>
     </servlet-mapping>
-<!--====================getHotels=========================-->
+<!--====================getHotelsByAdminId=========================-->
     <servlet>
         <servlet-name>getHotels</servlet-name>
         <servlet-class>nure.kaplun.HotelSupervisor.controller.HotelServlets.HotelsGetterServlet</servlet-class>
@@ -48,6 +48,15 @@
     <servlet-mapping>
         <servlet-name>getHotels</servlet-name>
         <url-pattern>/getHotels</url-pattern>
+    </servlet-mapping>
+    <!--====================getAllHotels=========================-->
+    <servlet>
+        <servlet-name>getAllHotels</servlet-name>
+        <servlet-class>nure.kaplun.HotelSupervisor.controller.HotelServlets.AllHotelsGetterServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>getAllHotels</servlet-name>
+        <url-pattern>/getAllHotels</url-pattern>
     </servlet-mapping>
     <!--====================getHotelRooms=========================-->
     <servlet>
@@ -111,6 +120,24 @@
     <servlet-mapping>
         <servlet-name>getEquipmentById</servlet-name>
         <url-pattern>/getEquipmentById</url-pattern>
+    </servlet-mapping>
+    <!--====================updateEquipmentValue=========================-->
+    <servlet>
+        <servlet-name>updateEquipmentValue</servlet-name>
+        <servlet-class>nure.kaplun.HotelSupervisor.controller.EquipmentServlets.UpdateEquipmentCurrentValueServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>updateEquipmentValue</servlet-name>
+        <url-pattern>/updateEquipmentValue</url-pattern>
+    </servlet-mapping>
+    <!--====================getEquipmentByHotel=========================-->
+    <servlet>
+        <servlet-name>getEquipmentByHotel</servlet-name>
+        <servlet-class>nure.kaplun.HotelSupervisor.controller.EquipmentServlets.GetEquipmentByHotelServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>getEquipmentByHotel</servlet-name>
+        <url-pattern>/getEquipmentByHotel</url-pattern>
     </servlet-mapping>
     <!--====================getHotelEmployees=========================-->
     <servlet>

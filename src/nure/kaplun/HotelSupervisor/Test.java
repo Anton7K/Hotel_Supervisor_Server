@@ -17,10 +17,16 @@ import java.sql.Connection;
 public class Test {
     public static void main(String[] args){
         int equipmentId = 1;
+        int curValue = 10;
+        String operation = "minus";
         Connection connection = DataBaseConnector.openConnection();
         EquipmentRepository equipmentRepository = new EquipmentRepository(connection);
-        Equipment equipment = equipmentRepository.getEquipmentById(equipmentId);
+        if(operation=="plus"){
+            equipmentRepository.updateEquipmentValue(equipmentId, curValue);
+        }
+        if(operation=="minus"){
+            equipmentRepository.updateEquipmentValue(equipmentId, -curValue);
+        }
         DataBaseConnector.closeConnection(connection);
-        System.out.println(equipment.getMaxValue());
     }
 }

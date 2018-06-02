@@ -20,6 +20,7 @@ public class EquipmentRepository {
     public static final String DELETE_EQUIPMENT_BY_ID = "DELETE FROM "+ DbTables.EQUIPMENT_TABLE+" WHERE id=?";
     private static final String INSERT_EQUIPMENT_QUERY = "INSERT INTO " + DbTables.EQUIPMENT_TABLE + " (type,roomId,`maxValue`,currentValue) VALUES (?,?,?,?)";
     private static final String UPDATE_EQUIPMENT_QUERY = "UPDATE " +DbTables.EQUIPMENT_TABLE+ " SET type = ?,`maxValue` = ? WHERE `id` = ?";
+    private static final String UPDATE_EQUIPMENT_CURRENT_VALUE = "UPDATE " +DbTables.EQUIPMENT_TABLE+ " SET `currentValue` = `currentValue`+? WHERE `id` = ?";
 
     private Connection connection;
 
@@ -82,6 +83,18 @@ public class EquipmentRepository {
             ex.printStackTrace();
         }
     }
+
+    public void updateEquipmentValue(int equipmentId, int curValue){
+        try (PreparedStatement stmt = connection.prepareStatement(UPDATE_EQUIPMENT_CURRENT_VALUE)) {
+            stmt.setInt(1, curValue);
+            stmt.setInt(2, equipmentId);
+            stmt.executeUpdate();
+        }
+        catch (SQLException ex){
+            ex.printStackTrace();
+        }
+    }
+
 
     public void addEquipment(String type, int roomId, int maxValue){
         try (PreparedStatement stmt = connection.prepareStatement(INSERT_EQUIPMENT_QUERY)) {

@@ -15,6 +15,7 @@ import java.util.List;
  */
 public class HotelsRepository {
     public static final String SELECT_HOTELS_BY_ADMIN = "SELECT * FROM "+ DbTables.HOTELS_TABLE +" WHERE adminId=?";
+    public static final String SELECT_ALL_HOTELS= "SELECT * FROM "+ DbTables.HOTELS_TABLE;
     public static final String DELETE_HOTEL_BY_ID = "DELETE FROM "+ DbTables.HOTELS_TABLE+" WHERE id=?";
     public static final String INSERT_HOTEL_QUERY = "INSERT INTO hotels(name, adminId)VALUES(?,?)";
     private Connection connection;
@@ -41,6 +42,22 @@ public class HotelsRepository {
         return hotels;
     }
 
+    public List<Hotel> getAllHotels(){
+        List<Hotel> hotels = new ArrayList<>();
+        try (PreparedStatement stmt = connection.prepareStatement(SELECT_ALL_HOTELS)) {
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()){
+                Hotel hotel = new Hotel(rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getInt("adminId"));
+                hotels.add(hotel);
+            }
+        }
+        catch (SQLException ex){
+            ex.printStackTrace();
+        }
+        return hotels;
+    }
     public void addHotel(String name, int adminId){
         try (PreparedStatement stmt = connection.prepareStatement(INSERT_HOTEL_QUERY)) {
             stmt.setString(1, name);
