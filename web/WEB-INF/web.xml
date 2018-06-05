@@ -175,4 +175,13 @@
         <servlet-name>addRoom</servlet-name>
         <url-pattern>/addRoom</url-pattern>
     </servlet-mapping>
+    <!--====================deleteHotel=========================-->
+    <servlet>
+        <servlet-name>deleteHotel</servlet-name>
+        <servlet-class>nure.kaplun.HotelSupervisor.controller.HotelServlets.DeleteHotelServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>deleteHotel</servlet-name>
+        <url-pattern>/deleteHotel</url-pattern>
+    </servlet-mapping>
 </web-app>
